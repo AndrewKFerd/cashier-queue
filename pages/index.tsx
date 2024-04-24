@@ -11,7 +11,7 @@ interface Customer {
 const Queue: Page = () => {
   const names = ['John', 'Jane', 'Bob', 'Alice', 'Charlie', 'Emma'];
   const initialQueues: Customer[][] = [
-    names.slice(0, 2).map((name, index) => ({ id: index, name })),
+    names.slice(0, 2).map((name, index) => ({ id: index, name })), //Slicing for the intial hardcode members.
     names.slice(2, 4).map((name, index) => ({ id: index + 2, name })),
     names.slice(4, 6).map((name, index) => ({ id: index + 4, name })),
   ];
@@ -34,7 +34,7 @@ const Queue: Page = () => {
     }
   
     const cashierIndex = Math.floor(Math.random() * 3); // Randomly select a cashier
-    const newQueues = [...queues];
+    const newQueues = queues.map(queue => [...queue]); // Create a deep copy of the queues
     if (!newQueues[cashierIndex]) {
       newQueues[cashierIndex] = [];
     }
@@ -42,8 +42,9 @@ const Queue: Page = () => {
     setQueues(newQueues);
     setName('');
   };
-
-  const handleRemoveFromQueue = (cashierIndex: number) => {
+  
+  
+  const handleRemoveFromQueue = (cashierIndex: number) => { //removing from the queueu
     const newQueues = [...queues];
     if (newQueues[cashierIndex] && newQueues[cashierIndex].length > 0) {
       newQueues[cashierIndex].shift();
