@@ -38,19 +38,19 @@ const Queue: Page = () => {
     if (!newQueues[cashierIndex]) {
       newQueues[cashierIndex] = [];
     }
-    newQueues[cashierIndex].push({ id: Date.now(), name });
+    newQueues[cashierIndex]!.push({ id: Date.now(), name });
     setQueues(newQueues);
     setName('');
   };
   
-  
   const handleRemoveFromQueue = (cashierIndex: number) => { //removing from the queueu
-    const newQueues = [...queues];
-    if (newQueues[cashierIndex] && newQueues[cashierIndex].length > 0) {
-      newQueues[cashierIndex].shift();
+    const newQueues = queues.map(queue => [...queue]);
+    if (newQueues[cashierIndex] && newQueues[cashierIndex]!.length > 0) {
+      newQueues[cashierIndex]!.shift();
       setQueues(newQueues);
     }
   };
+  
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2">
